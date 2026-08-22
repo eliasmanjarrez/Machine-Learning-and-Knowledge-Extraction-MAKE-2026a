@@ -1,5 +1,4 @@
-# IntraBodyCoModulationViewer
-Intra-body joint-angle co-modulation: analysis pipeline and derived data
+# Intra-body joint-angle co-modulation: analysis pipeline and derived data
 
 Companion repository for
 
@@ -19,26 +18,61 @@ appropriate reference for the method, the dataset and the visualizer alike.
 
 ## The one thing to understand before anything else
 
-**Nothing here reads video.** The pipeline and the visualizer both start from a
-table of body coordinates, and producing that table is a separate step that you
-run yourself, with DeepLabCut.
+**Nothing here reads video.** Everything begins with a table of body
+coordinates, and producing that table is a separate step that you run
+yourself, with DeepLabCut. The visualizer reads such a table directly; the
+analysis scripts start one step further along, from the joint angles already
+derived from those coordinates and deposited in `data/`.
 
 ```
    your video (.mp4)
         │
         │   DeepLabCut + SuperAnimal-HumanBody       ← you run this, once
         ▼
-   coordinates (.h5 and .csv)     17 keypoints per person, per frame
+   pose coordinates (.h5 and .csv)
+        17 keypoints per person per frame,
+        three columns each: x, y, likelihood
         │
-        │   this repository
+        │   this repository, or the visualizer in your browser:
+        │   three keypoints define one angle, measured at the middle one
         ▼
-   13 joint signals  →  wavelet analysis  →  figures, tables, exported data
+   13 joint angles per person, one value per angle per frame
+        │
+        │   wavelet analysis
+        ▼
+   figures, tables, exported data
 ```
 
 Point the visualizer at an `.mp4` and nothing will happen: it is a web page,
 and it has no pose-estimation model inside it. Section 3 says which model to
 use, where its documentation lives, how the analysis in the article was run,
 and how long it takes.
+
+### Coordinates and angles are never the same file
+
+This is the distinction that is easiest to lose, so it is worth stating
+flatly: **what DeepLabCut writes are coordinates, not angles.**
+
+A pose file is the output of the pose-estimation model. One row is one video
+frame, and each of the 17 keypoints occupies three columns, `x`, `y` and
+`likelihood`: two positions in pixels of the original frame, and the score the
+model assigned to them. Such a file contains no angle of any kind. The pose
+files distributed here are the four `.csv` in `viewer/`, and they are what the
+visualizer opens.
+
+A joint-angle series is what the analysis works on. One row is one time
+sample, each of the 13 columns is one joint angle, and the values are degrees,
+or, after the conditioning described in Section 4, percentages of each angle's
+own range. These series are in `data/joint_angles_15hz.npz`. They are computed
+from the coordinates; no pose-estimation model produces them.
+
+The step between the two is arithmetic on triplets of keypoints: three
+keypoints define one angle, measured at the middle one, so that
+`left_shoulder` - `left_elbow` - `left_wrist` gives the left elbow angle.
+`data/angle_definitions.csv` lists the thirteen triplets in full. Hence `data/`
+holds angles and no coordinates, `viewer/` holds coordinates and no angles, and
+the visualizer performs this step in the browser every time a file is opened
+(Section 8).
 
 ---
 
@@ -52,16 +86,16 @@ to the source video.
 README.md            this file
 LICENSE              MIT for the code, CC-BY-4.0 for the data
 CITATION.cff         machine-readable citation
-requirements.txt     what the analysis needs (three packages)
-requirements-deeplabcut.txt   only if you will analyse your own video
+NOTICE               the attribution that travels with any copy
 
 code/                the analysis pipeline
   intrabody/         the library: wavelet core, anatomy, statistics
   step1 ... step6    one script per analysis, each printing its own numbers
   reproduce_all.py   runs all six and reports what matched
 
-data/                de-identified derived data, 40 MB in total
-viewer/              the interactive playback visualizer and three examples
+data/                de-identified derived data: the joint angles and the
+                     quantities computed from them, 40 MB in total
+viewer/              the visualizer, four pose files, a voice template
 tools/               dlc_h5_to_csv.py, to feed DeepLabCut output to the viewer
 ```
 
@@ -73,7 +107,8 @@ python reproduce_all.py
 ```
 
 That takes about five minutes. Every step prints its recomputed values beside
-the values printed in the article, and the final line counts how many matched.
+the values printed in the article, and the final line counts how many matched:
+26 values are checked, and all 26 match.
 `python reproduce_all.py --quick` runs the same checks with a reduced first
 step, in under a minute.
 
@@ -104,8 +139,10 @@ recording order or provenance.
 ## 3. Getting coordinates out of your own video, with DeepLabCut
 
 Skip this section if you only want to reproduce the published numbers: the
-coordinates are already in `data/`, and `reproduce_all.py` needs nothing from
-here. Read it if you want to run the method on a recording of your own.
+derived joint-angle series are already in `data/`, and `reproduce_all.py` needs
+nothing from here — no video, no coordinates and no DeepLabCut installation.
+Read this section only if you want to run the method on a recording of your
+own, which is the one case where you have to produce the coordinates yourself.
 
 ### 3.1 The model
 
@@ -203,12 +240,17 @@ python tools/dlc_h5_to_csv.py path/to/folder/      # or a whole folder
 
 Then open the `.csv` with **Your data** in the visualizer. The file must have
 the standard DeepLabCut layout: four header rows (`scorer`, `individuals`,
-`bodyparts`, `coords`) and one row per frame, with 17 keypoints for at least
-two detected individuals.
+`bodyparts`, `coords`) and one row per frame, with 17 keypoints. One individual
+per file is the ordinary case, and is what every file distributed here
+contains. A file holding several is read as well: a **Position in frame**
+control then appears and the visualizer draws one person at a time.
 
 ---
 
 ## 4. The data
+
+Everything here is derived from the pose coordinates; none of it is
+coordinates. The pose files are in `viewer/`, and Section 8 describes them.
 
 | File | Contents |
 |---|---|
@@ -244,7 +286,9 @@ data-sharing agreement.
 
 The derived data carry no name, no image, no date and no study identifier.
 Participants are numbered `P01` to `P70` after a fixed random permutation, so
-the ordering says nothing about who was recorded when.
+the ordering says nothing about who was recorded when. The same holds for the
+four pose files in `viewer/`, which are tables of pixel coordinates and are
+described in Section 8.
 
 Two points deserve to be stated plainly rather than assumed.
 
@@ -338,17 +382,20 @@ The wavelet implementation follows Torrence and Compo (1998) with
 double-clicking it. Nothing is installed, nothing is uploaded, and every
 computation runs in the page.
 
-### The bundled examples are 120 seconds. The full sessions are beside them.
+### The bundled examples are 120 seconds. One full session sits beside them.
 
-Three 120-second excerpts are stored **inside** the HTML file, which is why
-the menu offers them the moment the page opens. Each is the record of one
-participant, taken from three different people and from three different points
-in their sessions. They are display excerpts, not the material the article
-analyses.
+Three 120-second excerpts are stored **inside** the HTML file, compressed,
+which is why the menu offers them the moment the page opens. Each is the record
+of one participant, taken from three different people and from three different
+points in their sessions. They are display excerpts, not the material the
+article analyses.
 
 They are short for a mechanical reason. A full session is seven times longer:
 embedding one would make the browser decompress and transform more than fifty
-thousand frames before showing anything.
+thousand frames before showing anything. The one full session that is
+distributed therefore sits **beside** the page as an ordinary file,
+`viewer/Full_session_1.csv`, and is opened with **Your data** like any file of
+your own.
 
 One thing was done to them that was not done to the analysed data: the
 coordinates are written to two decimals. DeepLabCut prints a float32 as
@@ -357,7 +404,7 @@ of the conversion, not measurement. At a hundredth of a pixel nothing visible
 is lost, and each row drops from about 730 characters to 320, which is what
 the browser has to scan for every frame it draws.
 
-### Where each bundled file comes from
+### Where each file in `viewer/` comes from
 
 They are not anonymous samples: each is a stated stretch of a stated
 participant, so that anything seen in the viewer can be traced back to the
@@ -369,20 +416,37 @@ published arrays. `P07`, `P28` and so on are the same labels used throughout
 | `Example_dataset_1.csv` | P07 | 120 s, starting 120 s into the analysed segment |
 | `Example_dataset_2.csv` | P28 | 120 s, starting 300 s in |
 | `Example_dataset_3.csv` | P54 | 120 s, starting 480 s in |
-| `Full_session_1.csv` | P41 | the analysed segment in full, 52,200 frames |
+| `Full_session_1.csv` | P41 | 52,200 frames, 14.5 min: the recording from 30 s in to its end |
 
-The analysed segment is what the article uses: it begins 30 s (1,800 frames)
-into the recording, since 30 s are trimmed from each end. Every excerpt is
-taken from inside it, so what the viewer draws corresponds frame for frame
-with the series in `data/joint_angles_15hz.npz` for that participant, after
-the block averaging described in Section 2.5 of the article. The frame index
-is restarted at zero in each excerpt; leaving the original number would say
-which minute of the recording it came from.
+The **analysed segment** is what the article uses: it begins 30 s (1,800
+frames) into the recording and ends 30 s before it finishes, because 30 s are
+trimmed from each end. At 60 fps that is 50,400 frames, which after the block
+averaging described in Section 2.5 of the article is the 12,600 samples per
+participant held in `data/joint_angles_15hz.npz`.
 
-The per-participant pose files these were cut from are not distributed. They
-are coordinates of an identifiable person's body over fifteen minutes, which
-is a different kind of data from the joint-angle series in `data/`, and they
-were not part of what participants consented to release.
+`Full_session_1.csv` starts where the analysed segment starts, so its frame 0
+is sample 0 of the published series for P41, and it runs 1,800 frames past the
+end of that segment: the last 30 s of the file are the tail the analysis
+trims. The three excerpts are taken from inside the analysed segment, at the
+offsets stated in the table.
+
+Every excerpt therefore covers the same stretch of the same recording as the
+corresponding samples of `data/joint_angles_15hz.npz`, but it is not the same
+series: the analysis block-averages 60 fps to 15 Hz, whereas the visualizer
+displays every sixth frame, at 10 Hz, and normalises each file over its own
+length rather than over the whole session. The movement is the same; the
+sampling and the scaling are not. The frame index is restarted at zero in each
+excerpt; leaving the original number would say which minute of the recording
+it came from.
+
+What is published and what is not, plainly. The source video is not published
+and neither is the audio. Of the seventy per-participant pose files, this
+repository distributes one in full (`Full_session_1.csv`) together with three
+120-second excerpts, as the material the visualizer needs in order to be
+reproducible without the recordings. A pose file is a table of pixel
+coordinates: it carries no image, no sound, no name and no date, and the video
+that would attach a face to it is not shared. The recordings themselves remain
+available from the corresponding author under a data-sharing agreement.
 
 ### The voice channel, and why ours is empty
 
@@ -406,11 +470,13 @@ the panel draws is an envelope you have already computed.
 room audio, and the article analyses it, but the participants consented to
 analysis of their recordings and not to release of their voices.
 
-So that the panel can still be seen working, every bundled example carries a
-**demonstration envelope**: a clean synthetic tone at 0.25 Hz, generated in
-the page rather than shipped as a file, and labelled as such across the panel
-itself. Nobody can mistake a pure tone for speech, which is the point. Load
-your own envelope to replace it.
+So that the panel can still be seen working, each of the three embedded
+examples carries a **demonstration envelope**: a clean synthetic tone at
+0.25 Hz, generated in the page rather than shipped as a file, and labelled as
+such across the panel itself. Nobody can mistake a pure tone for speech, which
+is the point. Load your own envelope to replace it. A file you open yourself,
+`Full_session_1.csv` included, starts with no envelope at all, and the panel
+then says how to load one.
 
 Two further points about the audio in the article, which apply to any envelope
 you supply yourself: it is a single channel for the room, not one per speaker,
@@ -418,28 +484,32 @@ so it cannot attribute sound to either person; and the threshold used in the
 article separates epochs of high from low acoustic activity, not speech from
 verified silence.
 
-That fourth excerpt is on disk as a pose file like any other:
+### Opening a file takes time, and the page says how much
 
-```
-viewer/Example_dataset_4.csv        pose, 7,200 frames at 60 fps
-```
+To open the full session, or any DeepLabCut file of your own, click **Your
+data** and select the `.csv`. It is the same format the visualizer already
+reads, so nothing else changes: the skeleton, the joint-angle traces, the
+scalogram and the 13 x 13 matrix all work exactly as with the bundled
+examples.
 
-So the full sessions are supplied **as separate files** too:
+What does change is the wait. Nothing is precomputed inside the page. When a
+file is opened, the 13 angle series are derived from the coordinates, and then
+13 wavelet transforms and 78 cross-wavelet pairs are computed before anything
+is drawn. The cost grows faster than the length of the recording, because a
+longer record is also given longer wavelet scales.
 
-```
-viewer/Full_session_1.csv     one participant, 52,200 frames at 60 fps
-```
+Measured in Chrome on the machine used for the article, one of the 120-second
+excerpts, 7,200 frames, opens in ten to fifteen seconds, and
+`Full_session_1.csv`, 52,200 frames or 14.5 minutes, in about two minutes. A
+slower machine takes proportionally longer, and a recording of your own scales
+with its own duration rather than with its file size.
 
-To open one, click **Your data** in the viewer and select the file. It is the
-same DeepLabCut format the viewer already reads, so nothing else changes:
-the skeleton, the joint-angle traces, the scalogram and the 13 x 13 matrix all
-work exactly as with the bundled examples, but over the whole session that the
-article analyses. Loading takes longer, because every wavelet transform is
-computed up front.
-
-The full session starts where the analysis starts: the source videos run 15
-minutes and 30 seconds are trimmed from the beginning, so frame 0 of this file
-is frame 0 of the published time series.
+None of this has to be taken on trust while waiting. The page reports how many
+of the 78 pairs are done, how long it has taken so far and roughly how much is
+left, all timed on the machine in front of you rather than assumed, and once
+the file is open the header states how long it actually took. A page that
+seems frozen for a minute on a long recording is a page that is still
+computing.
 
 ### The sidebar, and what it selects
 
@@ -459,15 +529,17 @@ Joint signals measured at distal keypoints are named *distal arm* and *distal
 leg*: the 17-keypoint skeleton has no hand or foot landmark, so they describe
 limb-segment alignment rather than wrist or ankle flexion.
 
-Neither the excerpts nor the full sessions carry a participant identifier or a
-recording date.
+No file carries a participant identifier or a recording date inside it; the
+table under *Where each file in `viewer/` comes from* is what states the
+correspondence.
 
 ### Getting the numbers out, not just the picture
 
 The **SAVE** button offers two formats for whichever panel is open. **PNG**
 writes the panel as drawn. **CSV** writes the numbers behind it, restricted to
 the time range currently on screen, with a short header naming the dataset,
-the participant, the time range and the sampling rate:
+the time range and the sampling rate — and, only when the file holds more than
+one individual, which of them is drawn:
 
 | Panel | What the CSV contains |
 |---|---|
@@ -484,16 +556,17 @@ usefully; the complete matrices are in `data/` for anyone who needs them.
 
 ### What the three columns per keypoint contain
 
-Both the excerpts and the full sessions are unfiltered SuperAnimal-HumanBody
+The excerpts and the full session alike are unfiltered SuperAnimal-HumanBody
 output, the file a user obtains by running the model on their own video. The
-coordinates are in pixels of the original frame and are given to two decimals;
-frames in which the detector returned no pose are left empty rather than
-filled.
+coordinates are in pixels of the original frame and are given to two decimals.
+A frame in which the detector returned no pose would be left empty rather than
+filled; in the four files distributed here there are none.
 
 The third column is the model's keypoint score. **It is not a probability and
 it is not bounded at 1**: the RTMPose head reports the peak response of its
-coordinate classifier, which is unnormalized, so roughly one value in six lies
-between 1.0 and 1.4. Higher still means more confident, and the values are
+coordinate classifier, which is unnormalized, so between an eighth and a
+quarter of the values in these files, depending on the file, lie above 1.0,
+and none exceeds 1.4. Higher still means more confident, and the values are
 comparable within a file. They are reproduced exactly as the model wrote them;
 truncating them at 1 would discard the ordering among the most confident
 detections. Any threshold applied to them should be chosen from the
@@ -505,10 +578,9 @@ between people over the course of a recording. The files distributed here were
 split beforehand, **one participant per file**, using the assignment described
 in Section 2.4 of the article; the split was checked against the coordinates
 the published pipeline stored and agrees with them to 0.00 pixels. That is why
-no side selector appears: there is only one person in the file. The empty
-candidates are
-dropped. Across all 17 keypoints of both files, one frame out of 50,400
-crosses between the two people.
+no **Position in frame** selector appears: there is only one person in the
+file, and the empty candidates are dropped. Across all 17 keypoints, one frame
+in the 50,400 of the analysed segment crosses between the two people.
 
 The skeleton overlay, the joint signals and the voice channel advance on a
 common time cursor, and the cross-wavelet surface of any pair can be shown
