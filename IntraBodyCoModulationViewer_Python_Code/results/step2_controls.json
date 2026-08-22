@@ -1,0 +1,56 @@
+{
+  "surrogate_excess": {
+    "Intra-limb": {
+      "excess": 335.8309604099819,
+      "cohens_d": 2.3661632770734737,
+      "wilcoxon_p": 3.559469460061398e-13
+    },
+    "Homologous": {
+      "excess": 230.09297996702648,
+      "cohens_d": 1.2133671401779038,
+      "wilcoxon_p": 7.089868770710433e-12
+    },
+    "Cross-limb": {
+      "excess": 37.829949921653395,
+      "cohens_d": 0.3612440182863661,
+      "wilcoxon_p": 0.005588297289173742
+    },
+    "Head-body": {
+      "excess": 5.914566857474198,
+      "cohens_d": 0.12049573642225807,
+      "wilcoxon_p": 0.35667529099605977
+    }
+  },
+  "strata": {
+    "0": {
+      "n_pairs": 56,
+      "mean": 1441.8997781909243
+    },
+    "1": {
+      "n_pairs": 8,
+      "mean": 1280.5286462102617
+    },
+    "2": {
+      "n_pairs": 10,
+      "mean": 1415.88177079337
+    },
+    "3": {
+      "n_pairs": 4,
+      "mean": 2500.247534724644
+    }
+  },
+  "zero_shared_stratum": {
+    "categories": [
+      "Homologous",
+      "Cross-limb",
+      "Head-body"
+    ],
+    "means": {
+      "Homologous": 1812.449854006086,
+      "Cross-limb": 1485.7827292937086,
+      "Head-body": 1117.6620617911929
+    },
+    "friedman_chi2": 70.65714285714284,
+    "friedman_p": 4.539378277225714e-16
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "category_means": {
+    "Intra-limb": 0.8869594646351678,
+    "Homologous": 0.839337801507541,
+    "Cross-limb": 0.8300536050328187,
+    "Head-body": 0.8239518943287079
+  },
+  "friedman_chi2": 206.5542857142857,
+  "friedman_p": 1.6175265781609566e-44,
+  "modulus_friedman_chi2": 126.56571428571442,
+  "spread_pct": {
+    "coherence": 7.4558493339055945,
+    "modulus": 46.56372314355966
+  },
+  "between_subject_cv_pct": {
+    "coherence": 0.3934048259866178,
+    "modulus": 46.33060755759382
+  },
+  "mean_profile_correlation": {
+    "coherence": 0.8799523249686074,
+    "modulus": 0.256940341634408
+  }
+}

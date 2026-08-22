@@ -1,0 +1,105 @@
+{
+  "n_participants": 70,
+  "max_relative_difference_vs_deposit": 6.413801506735755e-08,
+  "session average over the full plane (as reported)": {
+    "means": {
+      "Intra-limb": 1839.7386775025577,
+      "Homologous": 1812.449856300638,
+      "Cross-limb": 1433.0607602342423,
+      "Head-body": 1117.662060915519
+    },
+    "sds": {
+      "Intra-limb": 844.8764566295445,
+      "Homologous": 925.7555525783746,
+      "Cross-limb": 731.5933263407746,
+      "Head-body": 460.28363753916
+    },
+    "ordering": [
+      "Intra-limb",
+      "Homologous",
+      "Cross-limb",
+      "Head-body"
+    ],
+    "friedman_chi2": 126.56571428571442,
+    "friedman_p": 2.9723096208412395e-27,
+    "pairwise": {
+      "Intra-limb vs Homologous": {
+        "wilcoxon_p": 0.21581373432967166,
+        "cohens_d": 0.11695348533399026
+      },
+      "Intra-limb vs Cross-limb": {
+        "wilcoxon_p": 3.559469460061398e-13,
+        "cohens_d": 1.8683475842914605
+      },
+      "Intra-limb vs Head-body": {
+        "wilcoxon_p": 3.029015078896572e-11,
+        "cohens_d": 1.0098663698634536
+      },
+      "Homologous vs Cross-limb": {
+        "wilcoxon_p": 3.559469460061398e-13,
+        "cohens_d": 1.2317384054604443
+      },
+      "Homologous vs Head-body": {
+        "wilcoxon_p": 5.228384790565874e-10,
+        "cohens_d": 0.8656362640267198
+      },
+      "Cross-limb vs Head-body": {
+        "wilcoxon_p": 0.00045083867331844105,
+        "cohens_d": 0.4819633080012451
+      }
+    }
+  },
+  "session average restricted to the cone of influence": {
+    "means": {
+      "Intra-limb": 1669.518421708481,
+      "Homologous": 1643.5423636808678,
+      "Cross-limb": 1296.57078083189,
+      "Head-body": 1034.2167080144584
+    },
+    "sds": {
+      "Intra-limb": 797.6755267246218,
+      "Homologous": 870.6456821502426,
+      "Cross-limb": 688.3664102352152,
+      "Head-body": 437.77800405842896
+    },
+    "ordering": [
+      "Intra-limb",
+      "Homologous",
+      "Cross-limb",
+      "Head-body"
+    ],
+    "friedman_chi2": 114.90857142857158,
+    "friedman_p": 9.633150876087848e-25,
+    "pairwise": {
+      "Intra-limb vs Homologous": {
+        "wilcoxon_p": 0.13485373265724845,
+        "cohens_d": 0.12576231537530516
+      },
+      "Intra-limb vs Cross-limb": {
+        "wilcoxon_p": 3.559469460061398e-13,
+        "cohens_d": 1.775211885952301
+      },
+      "Intra-limb vs Head-body": {
+        "wilcoxon_p": 1.061774098215413e-10,
+        "cohens_d": 0.9605474507540684
+      },
+      "Homologous vs Cross-limb": {
+        "wilcoxon_p": 3.559469460061398e-13,
+        "cohens_d": 1.1951689744612404
+      },
+      "Homologous vs Head-body": {
+        "wilcoxon_p": 2.34143694521851e-09,
+        "cohens_d": 0.8220392621625393
+      },
+      "Cross-limb vs Head-body": {
+        "wilcoxon_p": 0.0013009307954607698,
+        "cohens_d": 0.43673713249685125
+      }
+    }
+  },
+  "coi_sensitivity": {
+    "mean_shift_pct": -8.890534419214301,
+    "same_ordering": true,
+    "same_significance": true
+  }
+}

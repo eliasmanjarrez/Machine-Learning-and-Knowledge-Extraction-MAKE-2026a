@@ -1,0 +1,114 @@
+{
+  "co-modulation, 13 angles": {
+    "forward": 20,
+    "reverse": 21,
+    "n": 70,
+    "accuracy_pct": 28.571428571428573,
+    "ci95_pct": [
+      19.322076591803132,
+      40.050418045366165
+    ],
+    "reverse_ci95_pct": [
+      20.53645673851015,
+      41.54453825618119
+    ],
+    "top5_pct": 54.285714285714285,
+    "permutation_p": 9.999000099990002e-05
+  },
+  "co-modulation, 9 angles (control)": {
+    "forward": 19,
+    "reverse": 19,
+    "n": 70,
+    "accuracy_pct": 27.142857142857142,
+    "ci95_pct": [
+      18.11946080878475,
+      38.5445334708625
+    ],
+    "reverse_ci95_pct": [
+      18.11946080878475,
+      38.5445334708625
+    ],
+    "top5_pct": 57.142857142857146,
+    "permutation_p": 9.999000099990002e-05
+  },
+  "anthropometry alone": {
+    "forward": 34,
+    "reverse": 36,
+    "n": 70,
+    "accuracy_pct": 48.57142857142857,
+    "ci95_pct": [
+      37.245682382738124,
+      60.04581725973982
+    ],
+    "reverse_ci95_pct": [
+      39.95418274026017,
+      62.75431761726187
+    ],
+    "top5_pct": 61.42857142857143,
+    "permutation_p": 9.999000099990002e-05
+  },
+  "residual after  3 components": {
+    "forward": 18,
+    "reverse": 22,
+    "n": 70,
+    "accuracy_pct": 25.714285714285715,
+    "ci95_pct": [
+      16.929141951409772,
+      37.026351970715424
+    ],
+    "reverse_ci95_pct": [
+      21.762136964668137,
+      43.02735838754525
+    ],
+    "top5_pct": 52.857142857142854,
+    "permutation_p": 9.999000099990002e-05,
+    "anthropometric_variance_captured_pct": 56.537803134236384,
+    "comodulation_variance_removed_pct": 7.488518030135069
+  },
+  "residual after  5 components": {
+    "forward": 17,
+    "reverse": 16,
+    "n": 70,
+    "accuracy_pct": 24.285714285714285,
+    "ci95_pct": [
+      15.751732611923112,
+      35.49526095268004
+    ],
+    "reverse_ci95_pct": [
+      14.58794018862768,
+      33.95055301845342
+    ],
+    "top5_pct": 44.285714285714285,
+    "permutation_p": 9.999000099990002e-05,
+    "anthropometric_variance_captured_pct": 72.02637608560175,
+    "comodulation_variance_removed_pct": 10.093319434620271
+  },
+  "residual after 10 components": {
+    "forward": 12,
+    "reverse": 17,
+    "n": 70,
+    "accuracy_pct": 17.142857142857142,
+    "ci95_pct": [
+      10.087625712010547,
+      27.61686606498236
+    ],
+    "reverse_ci95_pct": [
+      15.751732611923112,
+      35.49526095268004
+    ],
+    "top5_pct": 50.0,
+    "permutation_p": 9.999000099990002e-05,
+    "anthropometric_variance_captured_pct": 91.37232563439369,
+    "comodulation_variance_removed_pct": 24.01905808969989
+  },
+  "segment_length": {
+    "2_min_per_half": 12.857142857142858,
+    "4_min_per_half": 18.571428571428573,
+    "6_min_per_half": 28.571428571428573
+  },
+  "window_separation": {
+    "2_min_apart": 24.285714285714285,
+    "6_min_apart": 12.857142857142858,
+    "12_min_apart": 12.857142857142858
+  }
+}
