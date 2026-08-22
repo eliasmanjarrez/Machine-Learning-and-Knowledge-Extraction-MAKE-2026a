@@ -1,0 +1,91 @@
+cff-version: 1.2.0
+title: >-
+  Intra-body joint-angle co-modulation: analysis pipeline and derived data
+message: >-
+  If you use this software or these data, please cite the article listed under
+  preferred-citation.
+type: software
+authors:
+  - given-names: Miguel A.
+    family-names: Zamora-Ursulo
+    affiliation: >-
+      Instituto de Fisiologia, Benemerita Universidad Autonoma de Puebla,
+      Puebla, Mexico
+    email: col538264@colaborador.buap.mx
+  - given-names: Amira
+    family-names: Flores
+    affiliation: >-
+      Instituto de Fisiologia, Benemerita Universidad Autonoma de Puebla,
+      Puebla, Mexico
+  - given-names: Elias
+    family-names: Manjarrez
+    affiliation: >-
+      Instituto de Fisiologia, Benemerita Universidad Autonoma de Puebla,
+      Puebla, Mexico
+    email: elias.manjarrez@correo.buap.mx
+    orcid: 'https://orcid.org/0000-0002-3277-0101'
+license: MIT
+license-url: 'https://opensource.org/licenses/MIT'
+repository-code: '[repository URL to be inserted]'
+keywords:
+  - intra-body coordination
+  - cross-wavelet transform
+  - wavelet coherence
+  - markerless pose estimation
+  - joint-angle co-modulation
+  - spontaneous conversation
+  - motor control
+abstract: >-
+  Analysis pipeline and de-identified derived data for a study of how the
+  joints of one body co-modulate in amplitude during spontaneous face-to-face
+  conversation. The deposit contains the conditioned joint-angle series of 70
+  participants at 15 Hz, the cross-wavelet and wavelet-coherence matrices
+  derived from them, the circular-shift surrogate null, the anthropometric
+  vectors, and scripts that recompute every quantity reported in the
+  accompanying article, including the surrogate, coherence, shared-landmark
+  and anthropometry controls. An interactive playback visualizer is included.
+preferred-citation:
+  type: article
+  title: >-
+    Interactive playback visualizer to analyze joint-angle co-modulation with a
+    wavelet approach: application to pose-voice relationships during
+    spontaneous conversation
+  authors:
+    - given-names: Miguel A.
+      family-names: Zamora-Ursulo
+    - given-names: Amira
+      family-names: Flores
+    - given-names: Elias
+      family-names: Manjarrez
+  year: 2026
+  journal: Machine Learning and Knowledge Extraction
+  doi: '[article DOI to be inserted]'
+references:
+  - type: article
+    title: A practical guide to wavelet analysis
+    authors:
+      - given-names: Christopher
+        family-names: Torrence
+      - given-names: Gilbert P.
+        family-names: Compo
+    journal: Bulletin of the American Meteorological Society
+    year: 1998
+    volume: '79'
+    start: 61
+    end: 78
+  - type: article
+    title: >-
+      Application of the cross wavelet transform and wavelet coherence to
+      geophysical time series
+    authors:
+      - given-names: Aslak
+        family-names: Grinsted
+      - given-names: John C.
+        family-names: Moore
+      - given-names: Svetlana
+        family-names: Jevrejeva
+    journal: Nonlinear Processes in Geophysics
+    year: 2004
+    volume: '11'
+    start: 561
+    end: 566

@@ -1,0 +1,62 @@
+{
+  "fps": 60.0,
+  "examples": [
+    {
+      "file": "Example_dataset_1.csv",
+      "frames": 7200,
+      "fps": 60.0,
+      "seconds": 120.0,
+      "individuals": 1,
+      "keypoints": 17,
+      "mean_likelihood": 0.855,
+      "missing_fraction": 0.0,
+      "bytes": 2300174,
+      "note": "Display excerpt only. One participant per file. No audio from the study is distributed: participants consented to analysis of their recordings, not to release of their voices. The voice panel shows a synthetic demonstration tone, generated in the page and labelled as such; load your own envelope with LOAD VOICE CSV, in the format of voice_envelope_TEMPLATE.csv. The analyses in the article use the full record of each of the 70 participants.",
+      "n": 1,
+      "label": "Example 1: 120 s excerpt, one participant"
+    },
+    {
+      "file": "Example_dataset_2.csv",
+      "frames": 7200,
+      "fps": 60.0,
+      "seconds": 120.0,
+      "individuals": 1,
+      "keypoints": 17,
+      "mean_likelihood": 0.8962,
+      "missing_fraction": 0.0,
+      "bytes": 2327028,
+      "note": "Display excerpt only. One participant per file. No audio from the study is distributed: participants consented to analysis of their recordings, not to release of their voices. The voice panel shows a synthetic demonstration tone, generated in the page and labelled as such; load your own envelope with LOAD VOICE CSV, in the format of voice_envelope_TEMPLATE.csv. The analyses in the article use the full record of each of the 70 participants.",
+      "n": 2,
+      "label": "Example 2: 120 s excerpt, one participant"
+    },
+    {
+      "file": "Example_dataset_3.csv",
+      "frames": 7200,
+      "fps": 60.0,
+      "seconds": 120.0,
+      "individuals": 1,
+      "keypoints": 17,
+      "mean_likelihood": 0.7754,
+      "missing_fraction": 0.0,
+      "bytes": 2319867,
+      "note": "Display excerpt only. One participant per file. No audio from the study is distributed: participants consented to analysis of their recordings, not to release of their voices. The voice panel shows a synthetic demonstration tone, generated in the page and labelled as such; load your own envelope with LOAD VOICE CSV, in the format of voice_envelope_TEMPLATE.csv. The analyses in the article use the full record of each of the 70 participants.",
+      "n": 3,
+      "label": "Example 3: 120 s excerpt, one participant"
+    },
+    {
+      "file": "Full_session_1.csv",
+      "frames": 52200,
+      "fps": 60.0,
+      "seconds": 870.0,
+      "individuals": 1,
+      "keypoints": 17,
+      "mean_likelihood": 0.8387,
+      "missing_fraction": 0.0,
+      "bytes": 16804554,
+      "note": "Not an excerpt: one participant's session in full, 52,200 frames from 30 s into the recording to its end. The segment the article analyses is the first 50,400 of those frames, which after block averaging to 15 Hz gives the 12,600 samples per participant in data/joint_angles_15hz.npz. This file sits beside the page rather than inside it, and is opened with 'Your data'; it therefore carries no demonstration envelope, and the voice panel stays empty until one is loaded with LOAD VOICE CSV, in the format of voice_envelope_TEMPLATE.csv. No audio from the study is distributed: participants consented to analysis of their recordings, not to release of their voices.",
+      "label": "Full session, one participant, 14.5 minutes"
+    }
+  ],
+  "voice_template": "voice_envelope_TEMPLATE.csv",
+  "about": "Pose files distributed with the viewer so that the display can be reproduced without the source recordings. The three 120-second excerpts are also stored inside the HTML page, compressed, which is why the start screen offers them at once; the full session is too large to embed and sits beside the page as an ordinary file. Each holds one participant, and each is unfiltered SuperAnimal-HumanBody output: 17 keypoints per frame, three columns each (x, y, likelihood), coordinates in pixels of the original frame. None carries audio: no voice envelope is distributed. None carries a participant identifier or a recording date."
+}

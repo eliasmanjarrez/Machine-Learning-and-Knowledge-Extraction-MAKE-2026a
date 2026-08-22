@@ -1,0 +1,34 @@
+Intra-body joint-angle co-modulation: analysis pipeline and derived data
+
+Copyright (c) 2026 Miguel A. Zamora-Ursulo, Amira Flores, Elias Manjarrez
+Instituto de Fisiologia, Benemerita Universidad Autonoma de Puebla, Mexico
+
+This repository accompanies:
+
+  Zamora-Ursulo, M.A.; Flores, A.; Manjarrez, E.
+  Interactive playback visualizer to analyze joint-angle co-modulation with a
+  wavelet approach: application to pose-voice relationships during spontaneous
+  conversation.
+  Machine Learning and Knowledge Extraction, 2026.
+  [article DOI to be inserted]
+
+ATTRIBUTION
+
+  The code is released under the MIT License and the data under CC-BY-4.0.
+  Both licences require that this notice and the copyright statement be kept
+  with any copy or substantial portion of the work, including in derivative
+  works and in redistributions.
+
+  Beyond what the licences require, we ask that any publication, preprint,
+  thesis, report or software that uses this code or these data cite the
+  article above. A machine-readable citation is provided in CITATION.cff.
+
+WHAT MAY NOT BE REDISTRIBUTED
+
+  The source video recordings are not part of this repository and are not
+  redistributable. Participants consented to analysis, not to public release
+  of identifiable footage.
+
+  The derived data contain no names, no images, no recording dates and no
+  study identifiers. They must not be combined with other sources in any
+  attempt to re-identify the participants.

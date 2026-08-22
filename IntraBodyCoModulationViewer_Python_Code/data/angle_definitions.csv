@@ -1,0 +1,14 @@
+index,angle,keypoint_P1,keypoint_vertex,keypoint_P2,measurement
+1,L.Elbow,left_shoulder,left_elbow,left_wrist,Arm flexion/extension
+2,R.Elbow,right_shoulder,right_elbow,right_wrist,Arm flexion/extension
+3,L.Shoulder,left_hip,left_shoulder,left_elbow,Shoulder abduction
+4,R.Shoulder,right_hip,right_shoulder,right_elbow,Shoulder abduction
+5,L.Hip,left_shoulder,left_hip,left_knee,Trunk-thigh angle
+6,R.Hip,right_shoulder,right_hip,right_knee,Trunk-thigh angle
+7,L.Knee,left_hip,left_knee,left_ankle,Knee flexion/extension
+8,R.Knee,right_hip,right_knee,right_ankle,Knee flexion/extension
+9,L.Distal arm,left_elbow,left_wrist,left_shoulder,Forearm-upper arm alignment
+10,R.Distal arm,right_elbow,right_wrist,right_shoulder,Forearm-upper arm alignment
+11,L.Distal leg,left_knee,left_ankle,left_hip,Shank-thigh alignment
+12,R.Distal leg,right_knee,right_ankle,right_hip,Shank-thigh alignment
+13,Head/Neck,left_ear,nose,right_ear,Lateral head rotation

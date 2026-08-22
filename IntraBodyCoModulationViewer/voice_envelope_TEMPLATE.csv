@@ -1,0 +1,7 @@
+# Template for the LOAD VOICE CSV button of the viewer.
+# Two columns: time in seconds and one amplitude value.
+# Any sampling rate; the viewer reads it from the time column. Any units.
+# Replace the two example rows with your own envelope.
+time_s,envelope
+0.00,0.0
+0.05,0.0
